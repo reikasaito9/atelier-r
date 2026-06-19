@@ -41,25 +41,30 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.2rem 3rem;
-      background: rgba(247,243,238,0.88);
+      background: rgba(45,61,58,0.95);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(196,168,130,0.25);
+      border-bottom: 1px solid rgba(123,175,168,0.2);
     }
-
-    .nav-logo {
+    
+   .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.3rem;
       font-weight: 400;
       letter-spacing: 0.18em;
-      color: var(--dark);
+      color: #F4F7F5;
       text-decoration: none;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: rgba(244,247,245,0.7);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
     }
+
+    .nav-links a:hover { color: var(--sand); }
 
     .nav-links a {
       font-size: 0.72rem;
@@ -69,8 +74,6 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
-    .nav-links a:hover { color: var(--earth); }
 
     /* ── HERO ── */
     .hero {
@@ -679,14 +682,59 @@
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
 
-    @media (max-width: 600px) {
+  @media (max-width: 600px) {
       .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: rgba(45,61,58,0.98); padding: 2rem; gap: 1.5rem; z-index: 99; }
+      .hamburger { display: flex; }
       .services-grid { grid-template-columns: 1fr; }
       .works-grid { grid-template-columns: 1fr; }
       .works-grid .work-item:nth-child(1) { grid-column: 1; }
       .process-steps { grid-template-columns: 1fr; }
       .pricing-table { font-size: 0.78rem; }
     }
+
+    /* ── ハンバーガー ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #F4F7F5;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── TOPボタン ── */
+    .to-top {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      background: var(--dark);
+      color: #F4F7F5;
+      border: 1px solid var(--sand);
+      border-radius: 50%;
+      font-size: 1rem;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      z-index: 200;
+      transition: background 0.2s;
+    }
+    .to-top.visible { display: flex; }
+    .to-top:hover { background: var(--earth); }
 
     /* color swatches for placeholders */
     .c1 { background: linear-gradient(135deg, #EAE8C0 0%, #C5D98A 100%); }
@@ -713,15 +761,19 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">Atelier R</a>
-  <ul class="nav-links">
-    <li><a href="#services">できること</a></li>
-    <li><a href="#works">実績</a></li>
-    <li><a href="#process">制作の流れ</a></li>
-    <li><a href="#pricing">料金</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services" onclick="closeMenu()">できること</a></li>
+    <li><a href="#works" onclick="closeMenu()">実績</a></li>
+    <li><a href="#process" onclick="closeMenu()">制作の流れ</a></li>
+    <li><a href="#pricing" onclick="closeMenu()">料金</a></li>
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<a class="to-top" href="#top" id="toTop">↑</a>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -1113,6 +1165,22 @@
 </footer>
 
 <script>
+  // ハンバーガーメニュー
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  // TOPボタン
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    toTop.classList.toggle('visible', window.scrollY > 300);
+  });
+
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
