@@ -66,7 +66,15 @@
 
     .nav-links a:hover { color: var(--sand); }
 
- 
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--mid);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
@@ -685,6 +693,26 @@
       .pricing-table { font-size: 0.78rem; }
     }
 
+    /* ── ハンバーガー ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #F4F7F5;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
     /* ── TOPボタン ── */
     .to-top {
@@ -741,8 +769,11 @@
     <li><a href="#about" onclick="closeMenu()">About</a></li>
     <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-
+<a class="to-top" href="#top" id="toTop">↑</a>
 
 <!-- HERO -->
 <section class="hero" id="top">
