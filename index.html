@@ -55,6 +55,12 @@
       text-decoration: none;
     }
 
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
     .nav-links a {
       font-size: 0.72rem;
       letter-spacing: 0.15em;
@@ -66,7 +72,53 @@
 
     .nav-links a:hover { color: var(--sand); }
 
-      /* ── HERO ── */
+    /* ── ハンバーガー ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #F4F7F5;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── TOPボタン ── */
+    .to-top {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      background: var(--dark);
+      color: #F4F7F5;
+      border: 1px solid var(--sand);
+      border-radius: 50%;
+      font-size: 1rem;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      z-index: 200;
+      transition: background 0.2s;
+    }
+
+    .to-top.visible { display: flex; }
+    .to-top:hover { background: var(--earth); }
+
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: grid;
@@ -683,28 +735,6 @@
       .process-steps { grid-template-columns: 1fr; }
       .pricing-table { font-size: 0.78rem; }
     }
-
-    /* ── TOPボタン ── */
-    .to-top {
-      display: none;
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      width: 44px;
-      height: 44px;
-      background: var(--dark);
-      color: #F4F7F5;
-      border: 1px solid var(--sand);
-      border-radius: 50%;
-      font-size: 1rem;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      z-index: 200;
-      transition: background 0.2s;
-    }
-    .to-top.visible { display: flex; }
-    .to-top:hover { background: var(--earth); }
 
     /* color swatches for placeholders */
     .c1 { background: linear-gradient(135deg, #EAE8C0 0%, #C5D98A 100%); }
